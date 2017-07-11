@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lin.baseballsim.MainActivity">
+
+    <!-- New Game Button : To reset the game/start a new game -->
+    <Button
+        android:id="@+id/Reset_BTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/blue_btns"
+        android:onClick="resetGame"
+        android:text="new game"
+        android:textColor="#FFF"
+        android:textSize="32sp" />
+
+    <!-- Status Prompt : Provide on-->
+    <TextView
+        android:id="@+id/Status_Screen_TV"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_above="@id/Reset_BTN"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/blue_btns"
+        android:gravity="bottom"
+        android:isScrollContainer="true"
+        android:scrollbars="vertical"
+        android:text="\nGame Start"
+        android:textColor="#FFF"
+        android:textSize="16sp" />
+
+    <!-- Game Board -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/Status_Screen_TV"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp">
+
+        <!-- A line that separates the two teams' score board. -->
+        <View
+            android:id="@+id/SeparationLine"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="#c2c2d6" />
+
+        <!-- Team A layout: shows/contains all the relevant stats for the first team -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@id/SeparationLine"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Team A scoreboard title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Team A Score" />
+
+            <!-- Scoreboard for Team A-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+                <!-- Scoreboard -->
+                <TextView
+                    android:id="@+id/A_Score_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="4dp"
+                    android:text="Score:" />
+                <!-- Current Team A Score -->
+                <TextView
+                    android:id="@+id/A_Score_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:paddingTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- Total Home Runs in a game -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+                <!-- Home Run Text -->
+                <TextView
+                    android:id="@+id/A_HR_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="4dp"
+                    android:text="Total Home Run:" />
+                <!-- Home Run Counter -->
+                <TextView
+                    android:id="@+id/A_HR_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:paddingTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- Separator -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
+
+                android:background="#c2c2d6" />
+
+            <!-- Current Inning Stats -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Inning " />
+            <!-- Inning Number -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+                <!-- Current Inning Description: OFF/DEF -->
+                <TextView
+                    android:id="@+id/A_Inning_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Offense Round:" />
+                <!-- Current Inning Number Counter -->
+                <TextView
+                    android:id="@+id/A_Inning_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="12dp"
+                    android:text="1" />
+            </RelativeLayout>
+
+            <!-- Total Outs Counter -->
+            <!-- Placeholder, available in full game-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+                <!-- Outs Counter Description -->
+                <TextView
+                    android:id="@+id/A_TotalOut_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Total Outs:" />
+                <!-- Outs Counter Number -->
+                <TextView
+                    android:id="@+id/A_TotalOut_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- Strike Counter-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/A_Strike_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Strike:" />
+
+                <TextView
+                    android:id="@+id/A_Strike_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- Ball Counter-->
+            <!-- Available in future versions -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/A_Ball_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Ball:" />
+
+                <TextView
+                    android:id="@+id/A_Ball_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- First Base Status -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/A_FB_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="First Base:" />
+
+                <Button
+                    android:id="@+id/A_FB_BTN"
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/blue_btns"
+                    android:text="ON"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <!-- Second Base Status -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/A_SB_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Second Base:" />
+
+                <Button
+                    android:id="@+id/A_SB_BTN"
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/blue_btns"
+                    android:text="ON"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <!-- Third Base Status -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/A_TB_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Third Base:" />
+
+                <Button
+                    android:id="@+id/A_TB_BTN"
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/blue_btns"
+                    android:text="ON"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/A_Bat_BTN"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/blue_btns"
+                android:onClick="play"
+                android:text="BAT"
+                android:textColor="#FFF" />
+
+        </LinearLayout>
+
+        <!-- Team B layout: shows/contains all the relevant stats for the second team -->
+        <!-- Available in future versions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_toRightOf="@id/SeparationLine"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <!-- Team A scoreboard title -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Team A Score" />
+
+            <!-- Scoreboard for Team A-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+                <!-- Scoreboard -->
+                <TextView
+                    android:id="@+id/B_Score_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="4dp"
+                    android:text="Score:" />
+                <!-- Current Team A Score -->
+                <TextView
+                    android:id="@+id/B_Score_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:paddingTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- Total Home Runs in a game -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+                <!-- Home Run Text -->
+                <TextView
+                    android:id="@+id/B_HR_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="4dp"
+                    android:text="Total Home Run:" />
+                <!-- Home Run Counter -->
+                <TextView
+                    android:id="@+id/B_HR_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:paddingTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- Separator -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="12dp"
+
+                android:background="#c2c2d6" />
+
+            <!-- Current Inning Stats -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Inning " />
+            <!-- Inning Number -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/B_Inning_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Defense Round:" />
+
+                <TextView
+                    android:id="@+id/B_Inning_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="12dp"
+                    android:text="1" />
+
+            </RelativeLayout>
+
+            <!-- Total Outs Counter-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/B_TotalOut_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Total Outs:" />
+
+                <TextView
+                    android:id="@+id/B_TotalOut_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- Strike Counter-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/B_Strike_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Strike:" />
+
+                <TextView
+                    android:id="@+id/B_Strike_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- Ball Counter-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/B_Ball_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Ball:" />
+
+                <TextView
+                    android:id="@+id/B_Ball_CTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="0" />
+
+            </RelativeLayout>
+
+            <!-- First Base Status -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/B_FB_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="First Base:" />
+
+                <Button
+                    android:id="@+id/B_FB_BTN"
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/gray_btns"
+                    android:clickable="false"
+                    android:text="ON"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <!-- Second Base Status -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/B_SB_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Second Base:" />
+
+                <Button
+                    android:id="@+id/B_SB_BTN"
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/gray_btns"
+                    android:clickable="false"
+                    android:text="ON"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <!-- Third Base Status -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/B_TB_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="4dp"
+                    android:text="Third Base:" />
+
+                <Button
+                    android:id="@+id/B_TB_BTN"
+                    android:layout_width="48dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/gray_btns"
+                    android:clickable="false"
+                    android:text="ON"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/B_Bat_BTN"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/gray_btns"
+                android:clickable="false"
+                android:onClick="play"
+                android:text="BAT"
+                android:textColor="#FFF" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
